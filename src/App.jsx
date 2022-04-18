@@ -12,8 +12,17 @@ function App() {
     // const {sortBy,order}=value;
     // console.log("by",sortBy,"order",order)
     if(sortBy==='gender' && order==='asc'){
-    let data1 =data.sort((a,b)=>a.gender-b.gender);
-     setData(data1)
+      setData([...data.sort((a, b) => a.gender - b.gender)]);
+    }
+    
+    if(sortBy==='age' && order==='asc'){
+      setData([...data.sort((a, b) => a.age - b.age)]);
+    }
+    if(sortBy==='tenth_score' && order==='asc'){
+      setData([...data.sort((a, b) => a.tenth_score - b.tenth_score)]);
+    }
+    if(sortBy==='twelth_score' && order==='asc'){
+      setData([...data.sort((a, b) => a.twelth_score - b.twelth_score)]);
     }
   }
   const getData=()=>{
