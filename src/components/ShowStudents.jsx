@@ -1,21 +1,29 @@
-import {nanoid} from 'nanoid'
+
 import { useState } from "react";
-export const ShowStudents = ({data}) => {
+import {nanoid} from 'nanoid';
+export const ShowStudents = ({data,sorting}) => {
   const [handleSort,setHandleSort]=useState({
     sortBy:"",
     order:""
   })
   const handleChange=(e)=>{
     console.log(e.target.value)
+       const {value,id}=e.target;
+    // console.log(value,id)
+    setHandleSort({
+      ...handleSort,
+      [id]:value
+    })
   }
   return (
     <div>
       <div className="controls">
-        <div  onChange={handleChange}>
+        <div  >
           Sort By:{" "}
           <select
-           
+           onChange={handleChange}
             id="sortBy"
+            value={handleSort.sortBy}
             // select dropdown needs both value and onChange
             className="sortby"
           >
@@ -26,10 +34,11 @@ export const ShowStudents = ({data}) => {
             <option value="twelth_score">12th Score</option>
           </select>
         </div>
-        <div  onChange={handleChange}>
+        <div  >
           Order:
           <select
-           
+          onChange={handleChange}
+            value={handleSort.order}
             id="order"
             // select dropdown needs both value and onChange
             className="sortorder"
@@ -38,7 +47,9 @@ export const ShowStudents = ({data}) => {
             <option value="desc">Descending</option>
           </select>
         </div>
-        <button className="sort">sort</button>
+
+        <button className="sort" onClick={()=>sorting(handleSort)}>sort</button>
+
       </div>
       <table className="table">
         <thead>

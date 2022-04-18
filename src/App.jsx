@@ -8,8 +8,13 @@ function App() {
   useEffect(()=>{
     getData();
   },[])
-  const sorting =(e)=>{
-    console.log(e.target.innerText)
+  const sorting =({sortBy,order})=>{
+    // const {sortBy,order}=value;
+    // console.log("by",sortBy,"order",order)
+    if(sortBy==='gender' && order==='asc'){
+    let data1 =data.sort((a,b)=>a.gender-b.gender);
+     setData(data1)
+    }
   }
   const getData=()=>{
        axios.get('http://localhost:8080/students')
@@ -26,7 +31,7 @@ function App() {
         setToggle(toggle?false:true);
       }}>{toggle?"Add Student":"ShowStudents"}</button>
       {toggle?
-      <ShowStudents data={data}/>:
+      <ShowStudents data={data} sorting={sorting}/>:
       <AddStudent/>}
       
       {/* Show either  AddStudent component or ShowStudents dependeing on the above button click  */}
