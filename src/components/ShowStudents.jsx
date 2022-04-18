@@ -1,11 +1,28 @@
 
 import { useState } from "react";
 import {nanoid} from 'nanoid';
-export const ShowStudents = ({data,sorting}) => {
+export const ShowStudents = ({data,setData}) => {
   const [handleSort,setHandleSort]=useState({
     sortBy:"",
     order:""
   })
+  const sorting =({sortBy,order})=>{
+    // const {sortBy,order}=value;
+    // console.log("by",sortBy,"order",order)
+    if(sortBy==='gender' && order==='asc'){
+      setData([...data.sort((a, b) => a.gender - b.gender)]);
+    }
+    
+    if(sortBy==='age' && order==='asc'){
+      setData([...data.sort((a, b) => a.age - b.age)]);
+    }
+    if(sortBy==='tenth_score' && order==='asc'){
+      setData([...data.sort((a, b) => a.tenth_score - b.tenth_score)]);
+    }
+    if(sortBy==='twelth_score' && order==='asc'){
+      setData([...data.sort((a, b) => a.twelth_score - b.twelth_score)]);
+    }
+  }
   const handleChange=(e)=>{
     console.log(e.target.value)
        const {value,id}=e.target;
