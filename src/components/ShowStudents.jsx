@@ -1,10 +1,21 @@
-export const ShowStudents = () => {
+import {nanoid} from 'nanoid'
+import { useState } from "react";
+export const ShowStudents = ({data}) => {
+  const [handleSort,setHandleSort]=useState({
+    sortBy:"",
+    order:""
+  })
+  const handleChange=(e)=>{
+    console.log(e.target.value)
+  }
   return (
     <div>
       <div className="controls">
-        <div>
+        <div  onChange={handleChange}>
           Sort By:{" "}
           <select
+           
+            id="sortBy"
             // select dropdown needs both value and onChange
             className="sortby"
           >
@@ -15,9 +26,11 @@ export const ShowStudents = () => {
             <option value="twelth_score">12th Score</option>
           </select>
         </div>
-        <div>
+        <div  onChange={handleChange}>
           Order:
           <select
+           
+            id="order"
             // select dropdown needs both value and onChange
             className="sortorder"
           >
@@ -41,17 +54,20 @@ export const ShowStudents = () => {
           </tr>
         </thead>
         <tbody className="tbody">
+        {data.map((e)=>
+           <tr className="row" key={nanoid()}>
+           <td className="first_name">{e.first_name}</td>
+           <td className="last_name">{e.last_name}</td>
+           <td className="email">{e.email}</td>
+           <td className="gender">{e.gender}</td>
+           <td className="age">{e.age}</td>
+           <td className="tenth_score">{e.tenth_score}</td>
+           <td className="twelth_score">{e.twelth_score}</td>
+           <td className="preferred_branch">{e.preffered_branch}</td>
+         </tr>
+        )}
           {/* populate all rows like below: */}
-          <tr className="row">
-            <td className="first_name"></td>
-            <td className="last_name"></td>
-            <td className="email"></td>
-            <td className="gender"></td>
-            <td className="age"></td>
-            <td className="tenth_score"></td>
-            <td className="twelth_score"></td>
-            <td className="preferred_branch"></td>
-          </tr>
+         
         </tbody>
       </table>
     </div>
